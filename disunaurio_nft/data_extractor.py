@@ -15,27 +15,14 @@ def main(rootpath: str=path.join(path.realpath('.'),'svg_files')):
 
     basl_outpath = path.join(rootpath,'data/data_baseline.yml')
     comp_outpath = path.join(rootpath,'data/data_complements.yml')
-    prio_outpath = path.join(rootpath,'data/data_priority.yml')
 
     baseline_svgs = generate_structured_data(baseline_path)
     complements_svgs = generate_structured_data(complements_path)
-    priority = generate__layer_priority_data(baseline_path, complements_path)
 
     save_yaml(baseline_svgs, basl_outpath)
     save_yaml(complements_svgs, comp_outpath)
-    save_yaml(priority, prio_outpath)
     
-    typer.echo(f'Data extracted into: \n\t- {basl_outpath}\n\t- {comp_outpath}\n\t- {prio_outpath}')
-
-def generate__layer_priority_data(baseline_path:str, complements_path:str) -> None:
-    priority = defaultdict()
-    all_files = []
-    for folder in [baseline_path, complements_path]:
-        for _, _, files in walk(folder):
-            if '.gitignore' in files: files.remove('.gitignore')
-            all_files.extend(files)
-    priority = {f.replace('.svg',''): 0 for f in all_files}
-    return priority
+    typer.echo(f'Data extracted into: \n\t- {basl_outpath}\n\t- {comp_outpath}')
 
 
 def generate_structured_data(rootpath: str) -> defaultdict(list):
@@ -44,6 +31,7 @@ def generate_structured_data(rootpath: str) -> defaultdict(list):
         if files:
             key = path.basename(root)
             svgs[key] = {f.split('.')[0]: extract_elements(path.join(root, f)) for f in files if f != '.gitignore'}
+            for s in svgs[key]: svgs[key][s]['priority'] = 0    # Add priority parameter
     return svgs
 
 def extract_elements(filepath: str) -> dict:
