@@ -10,10 +10,6 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['Click>=7.0', ]
-
-test_requirements = ['pytest>=3', ]
-
 setup(
     author="Iñigo Orbegozo",
     author_email='orb3gozo@protonmail.com',
@@ -34,7 +30,6 @@ setup(
             'disunaurio_nft=disunaurio_nft.cli:main',
         ],
     },
-    install_requires=requirements,
     license="MIT license",
     long_description=readme + '\n\n' + history,
     include_package_data=True,
@@ -42,7 +37,6 @@ setup(
     name='disunaurio_nft',
     packages=find_packages(include=['disunaurio_nft', 'disunaurio_nft.*']),
     test_suite='tests',
-    tests_require=test_requirements,
     url='https://github.com/0rb3/disunaurio_nft',
     version='0.1.0',
     zip_safe=False,

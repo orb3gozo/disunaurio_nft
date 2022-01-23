@@ -3,7 +3,7 @@ import svgwrite
 from svgwrite import Drawing, rgb
 import random
 import yaml
-from element import Element
+from .element import Element
 
 
 def generate_drawing(element_list: list, filepath: str) -> Drawing:
@@ -35,16 +35,17 @@ def create_canvas(filepath: str) -> Drawing:
 def create_element_list(datafile: dict):
     elements_list = []
     for id, d in datafile.items():
-        contours, colors = extract_contours_n_colors(d)
-        elements_list.append(Element(id, contours, colors))
+        contours, colors, priority = extract_properties(d)
+        elements_list.append(Element(id, contours, colors, priority))
     return elements_list
 
-def extract_contours_n_colors(data:dict) -> tuple:
+def extract_properties(data:dict) -> tuple:
     contours, continents = [], []
     for key, d in data.items():
         if 'contour' in key: contours.append(d)
         if 'color' in key: continents.append(d)
-    return contours, continents
+    priority = data['priority']
+    return contours, continents, priority
 
 def load_yaml_conf_file(filepath:str)->dict:
     with open(filepath, "r") as f:

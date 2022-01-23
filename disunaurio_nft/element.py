@@ -2,13 +2,14 @@ import random
 
 class Element:
 
-    def __init__(self, id: str, contours:list, continents:list):
+    def __init__(self, id: str, contours:list, continents:list, priority:int):
         self.id = id
         self.contours = contours
         self.continents = continents
 
         self.contour_colors = self.generate_contour_colors()
         self.continents_colors = self.generate_continents_colors()
+        self.priority = priority
 
     def generate_contour_colors(self, color_pallete=None):
         contour_colors = []
