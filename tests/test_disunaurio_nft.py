@@ -6,8 +6,32 @@ import pytest
 
 from click.testing import CliRunner
 
-from disunaurio_nft import disunaurio_nft
 from disunaurio_nft import cli
+from os import path
+
+
+def test_disunaur_generator():
+    from disunaurio_nft.disunaur_generator import load_yaml_conf_file
+    from disunaurio_nft.disunaur_generator import generate_baseline_drawing
+    from disunaurio_nft.disunaur_generator import generate_complements
+    from disunaurio_nft.disunaur_generator import generate_drawing
+
+    base_datapath = path.join(path.realpath('.'), 'svg_files/data/data_baseline.yml')
+    comp_datapath = path.join(path.realpath('.'), 'svg_files/data/data_complements.yml')
+
+    baseline_data = load_yaml_conf_file(base_datapath)
+    complements_data = load_yaml_conf_file(comp_datapath)
+
+    for i in range(10):
+        output_svg_file = path.join(path.realpath('.'), f'svg_files/tests/test_{i}.svg')
+
+        element_list = []
+        element_list = generate_baseline_drawing(element_list, baseline_data)
+        element_list = generate_complements(element_list, complements_data)
+        dwg = generate_drawing(element_list, output_svg_file)
+        dwg.save(output_svg_file, True)
+
+        assert path.isfile(output_svg_file)
 
 
 @pytest.fixture
