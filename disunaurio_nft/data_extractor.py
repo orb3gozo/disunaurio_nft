@@ -1,23 +1,28 @@
-from os import path, walk, listdir
-import typer
+from email.policy import default
+import sys
+from os import path, walk
+import argparse
 import yaml
 from collections import defaultdict
 from xml.dom import minidom
 from yaml.representer import Representer
 yaml.add_representer(defaultdict, Representer.represent_dict)
 
-app = typer.Typer()
 
-@app.command()
-def main(rootpath: str=path.join(path.realpath('.'),'svg_files')):
-    baseline_path = path.join(rootpath, 'baseline')
-    complements_path = path.join(rootpath, 'complements')
-    basl_outpath = path.join(rootpath,'data/data.yml')
+def main(args=None):
+    if args is None:
+        args = sys.argv[1:]
+    args = parse_args(args)
+
+    baseline_path = path.join(args.rootpath, 'baseline')
+    complements_path = path.join(args.rootpath, 'complements')
+    data_outpath = path.join(args.rootpath,'data/data.yml')
 
     svgs = generate_structured_data(baseline_path)
     svgs['complements'] = generate_structured_data(complements_path)
 
-    save_yaml(svgs, basl_outpath)
+    save_yaml(svgs, data_outpath)
+    print(f'Extracted data file saved in: {data_outpath}')
 
 def generate_structured_data(rootpath: str) -> defaultdict(list):
     svgs = defaultdict(list)
@@ -41,5 +46,20 @@ def save_yaml(svgs: defaultdict, output_path: str) -> None:
     with open(output_path, 'w') as of:
         yaml.dump(svgs, of, default_flow_style=False)
 
+def parse_args(args):
+    description = '''
+    Extract svg vector data from svg files stored in baseline and complements folders and create data.yml file in data folder.
+    '''
+    epilog = '''
+            python3 ./disunaurio_nft/data_extractor.py
+    '''
+    parser = argparse.ArgumentParser(
+        description=description,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        epilog=epilog
+    )
+    parser.add_argument('--rootpath', default=path.join(path.realpath('.'),'svg_files'), help='')
+    return parser.parse_args(args)
+
 if __name__ == '__main__':
-    app()
+    main()
