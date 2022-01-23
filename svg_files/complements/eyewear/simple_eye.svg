@@ -1,0 +1,13 @@
+<svg id="Complements" xmlns="http://www.w3.org/2000/svg" width="2048" height="2048" viewBox="0 0 2048 2048">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #d2106b;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <g id="simple_eyes">
+    <path id="contour_1" class="cls-1" d="M1282,513c16.48-.983,21.81,20.683,7,27h-12c-4.83-3.5-6.95-6.473-7-15,0.81-2.59.86-4.78,3-7C1274.95,515.97,1276.12,513.793,1282,513Z"/>
+  </g>
+</svg>
