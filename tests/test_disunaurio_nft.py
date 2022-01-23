@@ -10,6 +10,15 @@ from disunaurio_nft import cli
 from os import path
 
 
+def test_data_extractor():
+    from disunaurio_nft import data_extractor
+
+    data_extractor.main("svg_files/tests")
+
+    assert path.isfile("svg_files/tests/data/data_baseline.yml")
+    assert path.isfile("svg_files/tests/data/data_complements.yml")
+
+
 def test_disunaur_generator():
     from disunaurio_nft.disunaur_generator import load_yaml_conf_file
     from disunaurio_nft.disunaur_generator import generate_baseline_drawing
