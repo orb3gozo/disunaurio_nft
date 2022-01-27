@@ -3,7 +3,7 @@ import svgwrite
 from svgwrite import Drawing, rgb
 import random
 import yaml
-from .element import Element
+from element import Element
 
 
 def generate_drawing(element_list: list, filepath: str) -> Drawing:
