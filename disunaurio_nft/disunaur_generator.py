@@ -53,8 +53,7 @@ def load_yaml_conf_file(filepath:str)->dict:
     return data
 
 def generate_baseline_drawing(element_list: list, baseline_data: dict) -> list:
-    for values in baseline_data.values():
-        element_list.extend(create_element_list(values))
+    element_list.extend(create_element_list(baseline_data))
     return element_list
 
 def generate_complements(element_list: list, complements_data: dict) -> list:
@@ -64,22 +63,3 @@ def generate_complements(element_list: list, complements_data: dict) -> list:
             comp = random.choice(comp_list)
             element_list.append(comp)
     return element_list
-
-# ----------------------------------------------------------------------------------------- 
-# -----------------------------------------------------------------------------------------
-# -----------------------------------------------------------------------------------------
-
-base_datapath = path.join(path.realpath('.'), 'svg_files/data/data_baseline.yml')
-comp_datapath = path.join(path.realpath('.'), 'svg_files/data/data_complements.yml')
-
-baseline_data = load_yaml_conf_file(base_datapath)
-complements_data = load_yaml_conf_file(comp_datapath)
-
-for i in range(10):
-    output_svg_file = path.join(path.realpath('.'), f'svg_files/tests/test_{i}.svg')
-    
-    element_list = []
-    element_list = generate_baseline_drawing(element_list, baseline_data)
-    element_list = generate_complements(element_list, complements_data)
-    dwg = generate_drawing(element_list, output_svg_file)
-    dwg.save(output_svg_file, True)

@@ -13,10 +13,9 @@ from os import path
 def test_data_extractor():
     from disunaurio_nft import data_extractor
 
-    data_extractor.main("svg_files/tests")
+    data_extractor.main()
 
-    assert path.isfile("svg_files/tests/data/data_baseline.yml")
-    assert path.isfile("svg_files/tests/data/data_complements.yml")
+    assert path.isfile("svg_files/data/data.yml")
 
 
 def test_disunaur_generator():
@@ -25,11 +24,10 @@ def test_disunaur_generator():
     from disunaurio_nft.disunaur_generator import generate_complements
     from disunaurio_nft.disunaur_generator import generate_drawing
 
-    base_datapath = path.join(path.realpath('.'), 'svg_files/data/data_baseline.yml')
-    comp_datapath = path.join(path.realpath('.'), 'svg_files/data/data_complements.yml')
+    datapath = path.join(path.realpath('.'), 'svg_files/data/data.yml')
 
-    baseline_data = load_yaml_conf_file(base_datapath)
-    complements_data = load_yaml_conf_file(comp_datapath)
+    baseline_data = load_yaml_conf_file(datapath)['baseline']
+    complements_data = load_yaml_conf_file(datapath)['complements']
 
     for i in range(10):
         output_svg_file = path.join(path.realpath('.'), f'svg_files/tests/test_{i}.svg')
