@@ -26,8 +26,8 @@ def main(args=None):
 
 def generate_structured_data(rootpath: str) -> defaultdict:
     """
-    Iterate over a folder extracting elements (using extract_elements fucntion)
-    form the files maintaining the hierarchy of the file structure translating to 
+    Iterate over a folder extracting elements (using extract_elements function)
+    from the files maintaining the hierarchy of the file structure translating to 
     a defaultdict object
 
     Args:
@@ -46,7 +46,7 @@ def generate_structured_data(rootpath: str) -> defaultdict:
 
 def extract_elements(filepath: str) -> dict:
     """
-    Given a filepath, obtain id and d elements form parsed xml tags (<path/>).
+    Given a filepath, obtain id and d elements from parsed xml tags (<path/>).
     The 'path' tag looks like this:
     
         <path id="color_3" class="cls-4" d="M1435,559c12.61,0.453,27.33,24"/>
