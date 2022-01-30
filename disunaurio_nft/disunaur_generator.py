@@ -132,7 +132,7 @@ def extract_properties(data:dict) -> tuple:
     priority = data['priority']
     return contours, continents, priority
 
-def load_yaml_conf_file(filepath:str)->dict:    
+def load_yaml_conf_file(filepath:str)->dict:
     with open(filepath, "r") as f:
         data = yaml.safe_load(f)
     return data
