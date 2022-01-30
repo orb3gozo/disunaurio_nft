@@ -99,7 +99,7 @@ def generate_complements(element_list: list, complements_data: dict) -> list:
 
 def create_element_list(data: dict) -> list:
     """
-    Extract porperties from a data dictionary, create one element with this extracted data
+    Extract properties from a data dictionary, create one element with this extracted data
     per each dictionary_key/svg_file.
 
     Args:
