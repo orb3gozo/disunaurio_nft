@@ -2,8 +2,7 @@ import argparse
 import sys
 import yaml
 from collections import defaultdict
-from email.policy import default
-from os import path, walk, listdir
+from os import path, walk
 from xml.dom import minidom
 from yaml.representer import Representer
 yaml.add_representer(defaultdict, Representer.represent_dict)
