@@ -6,6 +6,20 @@ import yaml
 from .element import Element
 
 
+def sort_by_priority(element_list: list) -> list:
+    """
+    Sort list of elements by their priority
+
+    Args:
+        element_list (list): List of element objects
+
+    Returns:
+        list: List of element objects sorted by priority
+    """
+    priority_list = [element.priority for element in element_list]
+    _, element_list = zip(*sorted(zip(priority_list, element_list)))
+    return element_list
+
 def generate_drawing(element_list: list, filepath: str) -> Drawing:
     """
     Generate a svgwrite Drawing object using a list of element objects
