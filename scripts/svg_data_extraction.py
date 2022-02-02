@@ -1,7 +1,5 @@
 import argparse
 import sys
-
-from collections import defaultdict
 from os import path
 
 from disunaurio_nft.data_extractor import save_yaml, generate_structured_data
