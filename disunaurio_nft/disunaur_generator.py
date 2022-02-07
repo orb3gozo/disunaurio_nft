@@ -16,9 +16,8 @@ def sort_by_priority(element_list: list) -> list:
     Returns:
         list: List of element objects sorted by priority
     """
-    priority_list = [element.priority for element in element_list]
-    _, element_list = zip(*sorted(zip(priority_list, element_list)))
-    return element_list
+    return sorted(element_list, key=lambda e: e.priority)
+
 
 def generate_drawing(element_list: list, filepath: str) -> Drawing:
     """
