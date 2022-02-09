@@ -6,8 +6,8 @@ disunaurio_nft
 .. image:: https://img.shields.io/pypi/v/disunaurio_nft.svg
         :target: https://pypi.python.org/pypi/disunaurio_nft
 
-.. image:: https://img.shields.io/travis/0rb3/disunaurio_nft.svg
-        :target: https://travis-ci.com/0rb3/disunaurio_nft
+.. image:: https://github.com/i97orbegozo/disunaurio_nft/actions/workflows/test_pipeline.yml/badge.svg?event=push
+        :target: https://github.com/i97orbegozo/disunaurio_nft/actions
 
 .. image:: https://readthedocs.org/projects/disunaurio-nft/badge/?version=latest
         :target: https://disunaurio-nft.readthedocs.io/en/latest/?version=latest
