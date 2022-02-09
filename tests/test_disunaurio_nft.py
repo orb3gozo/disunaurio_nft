@@ -11,10 +11,17 @@ from os import path
 
 
 def test_data_extractor():
-    from disunaurio_nft import data_extractor
+    from disunaurio_nft.data_extractor import generate_structured_data
+    from disunaurio_nft.data_extractor import save_yaml
 
-    data_extractor.main()
+    baseline_path = path.join(path.realpath('.'), 'svg_files/baseline')
+    complements_path = path.join(path.realpath('.'), 'svg_files/complements')
+    data_outpath = path.join(path.realpath('.'),'svg_files/data/data.yml')
 
+    svgs = generate_structured_data(baseline_path)
+    svgs['complements'] = generate_structured_data(complements_path)
+
+    save_yaml(svgs, data_outpath)
     assert path.isfile("svg_files/data/data.yml")
 
 
